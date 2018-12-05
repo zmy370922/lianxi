@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				background: skyblue;
+				text-align: center;
+				margin: 50px auto;
+				padding: 50px;
+			}
+			div input{
+				margin-top: 20px;
+			}
+		</style>
+		<script src = "../js/Ajax.js"></script>
+		<script src = "../js/tool.js"></script>
+		<script>
+			window.onload = function(){
+				var oLogin = document.getElementById('login');
+				var oRegister = document.getElementById('register');
+				var aAs = document.getElementsByTagName('a');
+				var oLoginMsg = document.getElementById('loginMsg');
+				var oRegisterMsg = document.getElementById('registerMsg');
+				
+				aAs[0].onclick = function(ev){
+					var e = ev ||window.event;
+					preDef(e);
+					oLoginMsg.style.display = 'none';
+					oRegisterMsg.style.display = 'block';
+				}
+				aAs[1].onclick = function(ev){
+					var e = ev || window.event;
+					preDef(e);
+					oLoginMsg.style.display = 'block';
+					oRegisterMsg.style.display = 'none';
+				}
+				oLogin.onclick = function(){
+					var str = `username=${$("name=username")[0].value}&password=${$("name=password")[0].value} `;
+					Ajax({
+						method :'post',
+						url:"test.php?type = login",
+						data:str,
+						success :function(data){
+							alert(data);
+						},
+						error : function(msg){
+							alert(msg);
+						}
+					})
+				}
+				
+				oRegister.onclick = function(){
+					var str = `username=${$("name=username")[1].value}&password=${$("name=password")[1].value}&repassword=${$("name=repassword")[0].value}`;
+					Ajax({
+						method:'post',
+						url:'test.php?type = register',
+						data:str,
+						success:function(data){
+							alert(data);
+						},
+						error:function(mas){
+							alert(msg);
+						}
+					})
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="loginMsg">
+			<input type="text" name="username" placeholder="用户名">
+			<input type="password" name="password" placeholder="密码">
+			<button id="login">登录</button>
+			<a href="">注册</a>
+		</div>
+		<div id="registerMsg" style = 'display:none';>
+			<input type="text" name="username" placeholder="用户名">
+			<input type="password" name="password" placeholder="密码">
+			<input type="password" name="repassword" placeholder="密码">
+			<button id="register">注册</button>
+			<a href="">登录</a>
+		</div>
+	</body>
+</html>
