@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = '../js/Ajax.js'></script>
+	<script>
+	window.onload = function(){
+		var oBtn = document.getElementById('btn1');
+		var oUl = document.getElementById('ul1');
+		oBtn.onclick = function(){
+			Ajax({
+				url:'../code/getaleng.php',
+				success : function(data){
+					var arr = JSON.parse(data);
+
+					for(var i = 0; i < arr.length; i++){
+						var oLi = document.createElement('li');
+						var oA = document.createElement('a');
+						var oSpan = document.createElement('span');
+						oA.innerHTML = arr[i].title;
+						oA.href = '#';
+						oSpan.innerHTML = `【${arr[i].data}】`;
+						oLi.appendChild(oA);
+						oLi.appendChild(oSpan);
+						oUl.appendChild(oLi);
+					}
+
+				}
+			})
+		}
+	}
+	</script>
+</head>
+<body>
+	<button id="btn1">点击领取阿冷</button>
+	<ul id="ul1">
+
+	</ul>
+</body>
+</html>

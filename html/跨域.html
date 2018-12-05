@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			#search{
+				width: 300px;
+				height: 50px;
+				font-size: 18px;
+			}
+			#ul1{
+				width: 300px;
+				border: 1px solid #666;
+				display: none;
+			}
+			#ul1 li{
+				display: none;
+			}
+			#ul1 li :hover{
+				background: skyblue;
+				color: #fff;
+			}
+		</style>
+		<script>
+		function download(data){
+			var oUl = document.getElementById('ul1');
+			oUl.innerHTML = '';
+			var arr = data.s;
+			if (arr.length) {
+				oUl.style.display = 'block';
+				for(var i = 0; i <arr.length; i++){
+					var oLi = document.createElement('li');
+					var oA = document.createElement('a');
+					oA.href = "http://www.baidu.com/s?wd=" + arr[i];
+					oA.innerHTML = arr[i];
+					oA.target = "_blank";
+					oLi.appendChild('oA');
+					oUl.appendChild('oLi');
+				}
+			}else{
+				oUl.style.display= 'none';
+			}
+			window.onload =function(){
+				var oSearch = document.getElementById('search');
+				var oUl = document.getElementById('ul1');
+				oSearch.onkeyup = function(){
+					if (this.value != '') {
+						var oScript = document.createElement('script');
+						oScript.src = `http://suggestion.baidu.com/su?wd=${this.value}&cb=download`;
+						document.body.appendChild(oScript);
+					}else{
+						oUl.style.display = 'none';
+					}
+				}
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<input type="text" id="search">
+		<ul id="ul1">
+
+		</ul>
+	</body>
+</html>

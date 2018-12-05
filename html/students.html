@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script src = '../js/Ajax.js'></script>
+		<script>
+			window.onload = function(){
+				var oBtn = document.getElementById('btn1');
+				oBtn.onclick = function(){
+					Ajax({
+						url:'../code/ students.php',
+						success:function(data){
+
+						}
+
+					})
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button id="btn1"></button>
+		<table id="Tab"></table>
+	</body>
+</html>
